@@ -1,0 +1,7 @@
+pysync.cfg.dev
+pysync.log
+build/
+dist/
+recursos/
+*.pyc
+pysync.spec

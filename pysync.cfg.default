@@ -1,0 +1,26 @@
+[MAIL]
+enable = yes
+subject_ok = ☺ Sync windows Exitosa ✔
+subject_error = ☹ Sync windows Error ✖
+send_from = sender@example.com
+username = sender@example.com
+password = ********
+send_to = to@example.com,to@example.com
+files = no
+server = smtp.example.com
+port = 25
+tls = yes
+
+[GENERAL]
+binary = robocopy
+format_command = binary source_path destiny_path copy_options 
+source_path = C:\data
+destiny_path = C:\backup\
+copy_options = /XO /E /R:3 /W:10
+
+[MOUNT]
+enable = no
+letter_und = J:
+username_und = username_und
+password_und = ******
+path_network = \\192.168.0.1\backup_remoto
