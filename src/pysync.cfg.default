@@ -24,3 +24,4 @@ letter_und = J:
 username_und = username_und
 password_und = ******
 path_network = \\192.168.0.1\backup_remoto
+umount = yes

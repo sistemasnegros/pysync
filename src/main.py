@@ -10,15 +10,24 @@ modulo principal de windowssyn
 import logging
 import argparse
 
+import sys
+# sys.path.append('/data_logica/dev/python/lib_sistemasnegros')
+
 # mis librerias
-from lib_mount import mount_und
-from lib_mail import send_mail
-from lib_robocopy import copy_mirror
-from lib_config import load_config
-from lib_command import run_command
+# print sys.path
+# try:
+from lib_sysblack.lib_mount import mount_und, umount_und
+from lib_sysblack.lib_mail import send_mail
+from lib_sysblack.lib_robocopy import copy_mirror
+from lib_sysblack.lib_config import load_config
+from lib_sysblack.lib_command import run_command
+
+
+# except Exception as e:
+# sys.path.append('/data_logica/dev/python/lib_sistemasnegros')
+# print "Install lib"
 
 #import os
-
 
 # Librerias de depuracion
 #import pdb
@@ -69,8 +78,30 @@ def fun_mount_und(config):
             letter_und=config.get("MOUNT", "letter_und"),
         )
 
+        logging.info('Comando generado:')
+
         if comando:
+            logging.info(comando)
             run_command(comando)
+        else:
+            logging.error("al Generar comando.")
+
+
+def fun_umount(config):
+    if config.get("MOUNT", "enable") == "yes" and config.get("MOUNT", "umount") == "yes":
+        comando = umount_und(
+            config.get("MOUNT", "letter_und"),
+            config.get("GENERAL", "destiny_path")
+        )
+    else:
+        return
+
+    if comando:
+        logging.info(comando)
+        run_command(comando)
+
+    else:
+        logging.error("al Generar comando.")
 
 
 def fun_send_mail(config, args):
@@ -150,6 +181,9 @@ def main():
         else:
             logging.info(comando)
             logging.info("Se evito la ejecucion del comando por estar habilitado el modo pruebas.")
+
+    # Desmontar la unidad
+    fun_umount(config)
 
     # Funcion controla el envio de correo
     fun_send_mail(config, args)

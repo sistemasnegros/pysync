@@ -1,0 +1,4 @@
+open localhost:2121
+user admin itsecurity
+mirror --delete --parallel=10 /domains /mnt/prueba_backup 
+exit

@@ -1,4 +1,4 @@
-pysync.cfg.dev
+*.dev
 pysync.log
 build/
 dist/
